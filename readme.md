@@ -181,7 +181,7 @@ sudo sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab'
 sudo apt-get git build-essential openssl libssl-dev pkg-config
 ```
 
-#####node
+####node
 
 ```
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
@@ -193,7 +193,7 @@ install global dev tools
 sudo npm install -g bower grunt-cli
 ```
 
-#####mongo
+####mongo
 
 add key
 ```
@@ -255,7 +255,7 @@ db.auth("","")
 ```
 
 
-#####nginx
+####nginx
 
 ```
 sudo apt-get install nginx
@@ -279,7 +279,7 @@ events {
 
 http {
 	#Server Header
-	more_set_headers "Server: Farmhaus";
+	more_set_headers "Server: boomboom";
 
 	# Let NGINX get the real client IP for its access logs
 	set_real_ip_from 127.0.0.1;
