@@ -1,5 +1,11 @@
 #INITIAL STEPS
 
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get autoremove
+sudo apt-get autoclean
+```
 
 ###adduser
 
@@ -18,6 +24,7 @@ dpkg-statoverride --update --add root sudo 4750 /bin/su
 
 unattended-upgrades, for sec
 ```
+sudo apt-get install unattended-upgrades
 dpkg-reconfigure -plow unattended-upgrades
 ```
 
@@ -153,7 +160,7 @@ apt-get install acct
 touch /var/log/wtmp
 ```
 
-###swap file
+####swap file
 
 ```
 sudo fallocate -l 4G /swapfile
@@ -173,6 +180,67 @@ sudo swapon /swapfile
 
 ```
 sudo sh -c 'echo "/swapfile none swap sw 0 0" >> /etc/fstab'
+```
+
+####secure tmp folders
+```
+sudo nano /etc/fstab
+```
+
+```
+tmpfs     /run/shm    tmpfs     ro,noexec,nosuid        0       0
+```
+
+```
+sudo mount -a
+```
+
+```
+sudo dd if=/dev/zero of=/usr/tmpDSK bs=1024 count=1024000
+sudo mkfs.ext4 /usr/tmpDSK
+```
+
+```
+sudo cp -avr /tmp /tmpbackup
+```
+
+```
+sudo mount -t tmpfs -o loop,noexec,nosuid,rw /usr/tmpDSK /tmp
+sudo chmod 1777 /tmp
+```
+
+```
+sudo cp -avr /tmpbackup/* /tmp/
+sudo rm -rf /tmpbackup
+```
+
+```
+sudo nano /etc/fstab
+```
+
+```
+/usr/tmpDSK /tmp tmpfs loop,nosuid,noexec,rw 0 0
+```
+
+```
+sudo mount -a
+```
+
+```
+sudo mv /var/tmp /var/tmpold
+sudo ln -s /tmp /var/tmp
+sudo cp -avr /var/tmpold/* /tmp/
+```
+
+####process limits
+
+```
+sudo nano /etc/security/limits.conf
+```
+
+```
+user1 hard nproc 100
+@group1 hard nproc 20
 ```
 
 ###devenv
