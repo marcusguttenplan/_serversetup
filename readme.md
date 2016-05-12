@@ -1,5 +1,3 @@
-104.131.135.9
-
 #INITIAL STEPS
 
 
@@ -267,7 +265,7 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM no
 
-AllowUsers marcus
+AllowUsers <> <> <>
 ```
 
 ```
