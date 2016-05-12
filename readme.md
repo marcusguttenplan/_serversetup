@@ -254,6 +254,9 @@ mongod --auth --config /etc/mongodb/mongodb.conf
 db.auth("","")
 ```
 
+```
+mongoimport --username --password --db  --collections  --type csv --headerline --file
+```
 
 ####nginx
 
