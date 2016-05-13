@@ -1,6 +1,6 @@
 #BASHETUP FOR NEW SERVERS
 
-Quickly spin up secure configs for sparkly new Ubuntu 14.04 servers. Mod it out and cut your time down. shamelessly lifted and tweaked from [betweenbrain](https://github.com/betweenbrain/ubuntu-web-server-build-script). Still throwing some minor errors.
+Quickly spin up secure configs for sparkly new Ubuntu 14.04 servers. Mod it out and cut down startup time. Shamelessly lifted and tweaked from [betweenbrain](https://github.com/betweenbrain/ubuntu-web-server-build-script). Still throwing some minor errors.
 
 ###USAGE
 
@@ -31,7 +31,8 @@ sh serversetup.sh
 the script will update system, upgrade packages, install tools for development (postgres, mongo, nodejs, git, etc), harden security, and generate a new user. it's fast.
 
 #####TODO
-Error on logwatch
-Script mongo.auth security
-Script swapfile
-Script tmp folder security
+-Fix error on `logwatch`
+-Script `mongo --auth` security
+-Script `swapfile`
+-Script `tmp` folder security
+-Script `OpenVPN` setup
