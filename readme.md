@@ -1,6 +1,6 @@
 #BASHETUP FOR NEW SERVERS
 
-mod it out and cut your time down. shamelessly lifted and tweaked from [betweenbrain](https://github.com/betweenbrain/ubuntu-web-server-build-script).
+Quickly spin up secure configs for sparkly new Ubuntu 14.04 servers. Mod it out and cut your time down. shamelessly lifted and tweaked from [betweenbrain](https://github.com/betweenbrain/ubuntu-web-server-build-script). Still throwing some minor errors.
 
 ###USAGE
 
