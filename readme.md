@@ -31,8 +31,8 @@ sh serversetup.sh
 the script will update system, upgrade packages, install tools for development (postgres, mongo, nodejs, git, etc), harden security, and generate a new user. it's fast.
 
 #####TODO
--Fix error on `logwatch`
--Script `mongo --auth` security
--Script `swapfile`
--Script `tmp` folder security
--Script `OpenVPN` setup
+*Fix error on `logwatch`
+*Script `mongo --auth` security
+*Script `swapfile`
+*Script `tmp` folder security
+*Script `OpenVPN` setup
