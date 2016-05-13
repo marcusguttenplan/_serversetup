@@ -1,4 +1,5 @@
 #INITIAL STEPS
+##ubuntu 14.04
 
 ```
 sudo apt-get update
