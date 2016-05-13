@@ -11,11 +11,11 @@ sudo apt-get autoclean
 ###adduser
 
 ```
-adduser <>
+adduser worker
 ```
 
 ```
-gpasswd -a <> sudo
+gpasswd -a worker sudo
 ```
 
 lockdown `su`
@@ -36,6 +36,19 @@ chmod 700 .ssh
 ```
 
 copy keys into `authorized keys`
+```
+chmod 600 .ssh/authorized_keys
+```
+
+repeat for user
+```
+```
+mkdir /home/worker/.ssh
+chmod 700 .ssh
+touch authorized_keys
+```
+
+copy keys <b>TODO</b>b> automate this
 ```
 chmod 600 .ssh/authorized_keys
 ```
@@ -134,7 +147,7 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM no
 
-AllowUsers marcus
+AllowUsers worker
 ```
 
 ```
@@ -330,7 +343,7 @@ mongoimport --username --password --db  --collections  --type csv --headerline -
 ####nginx
 
 ```
-sudo apt-get install nginx
+sudo apt-get install nginx-naxsi
 ```
 
 autostart on reboot
