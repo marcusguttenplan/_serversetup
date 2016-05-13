@@ -30,6 +30,7 @@ dpkg-reconfigure -plow unattended-upgrades
 ```
 
 ###ssh-keygen
+
 ```
 mkdir .ssh
 chmod 700 .ssh
@@ -41,7 +42,6 @@ chmod 600 .ssh/authorized_keys
 ```
 
 repeat for user
-```
 ```
 mkdir /home/worker/.ssh
 chmod 700 .ssh
@@ -62,7 +62,7 @@ nano /etc/ssh/sshd_config
 # See the sshd_config(5) manpage for details
 
 # What ports, IPs and protocols we listen for
-Port 33
+Port 
 # Use these options to restrict which interfaces/protocols sshd will bind to
 #ListenAddress ::
 #ListenAddress 0.0.0.0
