@@ -165,7 +165,6 @@ echo "$USER    ALL=(ALL) ALL" >> /etc/sudoers.tmp
 chmod 0440 /etc/sudoers.tmp
 mv /etc/sudoers.tmp /etc/sudoers
 
-
 # *) Manage SSH Keys before updating SSH config
 # ------------------------------------------------------------------ #
 
