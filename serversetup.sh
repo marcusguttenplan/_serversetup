@@ -22,7 +22,7 @@ SSHPORT=
 IGNOREIP=
 USER=
 ADMINEMAIL=
-PUBLICKEY="ssh-rsa ... foo@bar.com"
+PUBLICKEY="ssh-rsa . . . foo@bar.com"
 
 # ================================================================== #
 #                      End system specific details                   #
