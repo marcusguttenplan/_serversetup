@@ -28,6 +28,17 @@ from remote machine, run script as `root`
 bash serversetup.sh
 ```
 
+or, if you'd like to configure OpenVPN once initial install is complete, run script
+```
+bash serversetup_vpn.sh
+```
+this will configure the server to push tunnel routes to clients and NAT them.
+
+to add additional vpn profiles for clients, run
+```
+bash openvpn-install-helper.sh
+```
+
 the script will update system, upgrade packages, install tools for development (postgres, mongo, nodejs, git, etc), harden security, and generate a new user. it's fast.
 
 #####TODO
@@ -35,4 +46,4 @@ the script will update system, upgrade packages, install tools for development (
 * Script `mongo --auth` security
 * Script `swapfile`
 * Script `tmp` folder security
-* Script `OpenVPN` setup
+\\
