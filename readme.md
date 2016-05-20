@@ -25,7 +25,7 @@ scp serversetup.sh user@host:~/serversetup.sh
 
 from remote machine, run script as `root`
 ```
-sh serversetup.sh
+bash serversetup.sh
 ```
 
 the script will update system, upgrade packages, install tools for development (postgres, mongo, nodejs, git, etc), harden security, and generate a new user. it's fast.
