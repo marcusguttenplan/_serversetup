@@ -283,15 +283,15 @@ echo "---------------------------------------------------------------"
 # Flush old rules
 iptables -F
 
-# Allow SSH connections on tcp port $SSHPORT
-# This is essential when working on remote servers via SSH to prevent locking yourself out of the system
-#
-iptables -A INPUT -p tcp --dport $SSHPORT -j ACCEPT
-
 # Set default chain policies
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
+
+# Allow SSH connections on tcp port $SSHPORT
+# This is essential when working on remote servers via SSH to prevent locking yourself out of the system
+#
+iptables -A INPUT -p tcp --dport $SSHPORT -j ACCEPT
 
 # Accept packets belonging to established and related connections
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
@@ -460,17 +460,6 @@ echo "Verify and Download NodeJS"
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get install -y nodejs
 
-echo
-echo
-echo
-echo "Verify and Download MongoDB"
-
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-
-#update and reload
-apt-get update
-apt-get install mongodb-org
 
 
 # *) ALMOST THERE!!!!!
