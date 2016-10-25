@@ -284,8 +284,8 @@ echo "---------------------------------------------------------------"
 iptables -F
 
 # Set default chain policies
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
+# iptables -P INPUT DROP
+# iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 
 # Allow SSH connections on tcp port $SSHPORT
