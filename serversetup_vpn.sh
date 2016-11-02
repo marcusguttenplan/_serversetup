@@ -65,7 +65,7 @@ echo "---------------------------------------------------------------"
 # ------------------------------------------------------------------ #
 apt-get update
 apt-get upgrade
-apt-get install -y --force-yes unattended-upgrades iptables curl git nginx-naxsi postgresql libpq-dev build-essential libcurl4-openssl-dev zlib1g-dev openvpn easy-rsa
+apt-get install -y --force-yes unattended-upgrades iptables curl git nginx-naxsi postgresql libpq-dev build-essential libcurl4-openssl-dev zlib1g-dev openvpn easy-rsa iptables-persistent
 
 
 # *) Configure PostgreSQL
@@ -799,6 +799,10 @@ crl-verify crl.pem" >> /etc/openvpn/server.conf
 		iptables -I INPUT -p udp --dport $PORT -j ACCEPT
 		iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT
 		iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+		iptables -A INPUT -p udp --dport 53 -s 8.8.8.8 -j ACCEPT
+		iptables -A INPUT -p tcp --dport 53 -s 8.8.8.8 -j ACCEPT
+		iptables -A INPUT -p tcp --dport 53 -s 8.8.4.4 -j ACCEPT
+		iptables -A INPUT -p udp --dport 53 -s 8.8.4.4 -j ACCEPT
 		sed -i "1 a\iptables -I INPUT -p udp --dport $PORT -j ACCEPT" $RCLOCAL
 		sed -i "1 a\iptables -I FORWARD -s 10.8.0.0/24 -j ACCEPT" $RCLOCAL
 		sed -i "1 a\iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT" $RCLOCAL
