@@ -318,6 +318,12 @@ iptables -A FORWARD -i eth0 -o eth1 -j ACCEPT
 iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
+# Make sure DNS doesn;t ever get locked out
+iptables -A INPUT -p udp --dport 53 -s 8.8.8.8 -j ACCEPT
+iptables -A INPUT -p tcp --dport 53 -s 8.8.8.8 -j ACCEPT
+iptables -A INPUT -p tcp --dport 53 -s 8.8.4.4 -j ACCEPT
+iptables -A INPUT -p udp --dport 53 -s 8.8.4.4 -j ACCEPT
+
 # Log dropped packets
 iptables -N LOGGING
 iptables -A INPUT -j LOGGING
