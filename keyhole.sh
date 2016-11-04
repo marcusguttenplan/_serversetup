@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # echo "Enter Directory: "
 read -e -p "Enter Key File: " keyfile
 read -e -p "Enter User: " userpath
