@@ -55,7 +55,7 @@ echo "---------------------------------------------------------------"
 # ------------------------------------------------------------------ #
 apt-get update
 apt-get upgrade
-apt-get install -y --force-yes unattended-upgrades iptables curl git nginx-naxsi postgresql libpq-dev build-essential libcurl4-openssl-dev zlib1g-dev
+apt-get install -y --force-yes unattended-upgrades iptables curl git nginx-naxsi postgresql libpq-dev build-essential libcurl4-openssl-dev zlib1g-dev iptables-persistent ipset
 
 
 # *) Configure PostgreSQL
@@ -508,4 +508,3 @@ echo
 echo "If not, now is your (last?) chance to fix things."
 echo
 echo "==============================================================="
-
