@@ -41,6 +41,21 @@ bash openvpn-install-helper.sh
 
 the script will update system, upgrade packages, install tools for development (postgres, mongo, nodejs, git, etc), harden security, and generate a new user. it's fast.
 
+#### IPtables Blacklist
+
+```
+mkdir -p /etc/ipset-blacklist
+```
+```
+cp ipset-blacklist/ipset-blacklist.conf /etc/ipset-blacklist/ipset-blacklist.conf
+```
+```
+cp ipset-blacklist/ip-blacklist-custom.list /etc/ipset-blacklist/ip-blacklist-custom.list
+```
+```
+bash ipset-blacklist/update-blacklist.sh
+```
+
 #####TODO
 * Fix error on `logwatch`
 * Script `mongo --auth` security
