@@ -52,9 +52,18 @@ cp ipset-blacklist/ipset-blacklist.conf /etc/ipset-blacklist/ipset-blacklist.con
 ```
 cp ipset-blacklist/ip-blacklist-custom.list /etc/ipset-blacklist/ip-blacklist-custom.list
 ```
+Update, load updated `ipset` list with `restore`, create `iptables` rule:
 ```
 bash ipset-blacklist/update-blacklist.sh
 ```
+```
+ipset restore < /etc/ipset-blacklist/ip-blacklist.restore
+```
+```
+iptables -I INPUT 1 -m set --match-set blacklist src -j DROP
+```
+
+`iptables-persistent` will persist these rules. 
 
 #### dotfiles
 
