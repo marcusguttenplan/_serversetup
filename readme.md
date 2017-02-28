@@ -32,8 +32,8 @@ or, if you'd like to configure OpenVPN once initial install is complete, run scr
 ```
 bash serversetup_vpn.sh
 ```
-this will configure the server to push tunnel routes to clients and NAT them.
 
+this will configure the server to push tunnel routes to clients and NAT them.
 to add additional vpn profiles for clients, run
 ```
 bash openvpn-install-helper.sh
@@ -52,6 +52,7 @@ cp ipset-blacklist/ipset-blacklist.conf /etc/ipset-blacklist/ipset-blacklist.con
 ```
 cp ipset-blacklist/ip-blacklist-custom.list /etc/ipset-blacklist/ip-blacklist-custom.list
 ```
+
 Update, load updated `ipset` list with `restore`, create `iptables` rule:
 ```
 bash ipset-blacklist/update-blacklist.sh
