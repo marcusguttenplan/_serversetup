@@ -56,6 +56,13 @@ cp ipset-blacklist/ip-blacklist-custom.list /etc/ipset-blacklist/ip-blacklist-cu
 bash ipset-blacklist/update-blacklist.sh
 ```
 
+#### dotfiles
+
+```
+cp _dotfiles/bashrc ~/.bashrc && cp _dotfiles/bash_profile ~/.bash_profile
+source ~/.bash_profile
+```
+
 #####TODO
 * Fix error on `logwatch`
 * Script `mongo --auth` security
