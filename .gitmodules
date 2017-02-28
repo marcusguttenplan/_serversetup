@@ -1,3 +1,6 @@
 [submodule "ipset-blacklist"]
 	path = ipset-blacklist
 	url = https://github.com/marcusguttenplan/ipset-blacklist
+[submodule "_dotfiles"]
+	path = _dotfiles
+	url = https://github.com/marcusguttenplan/_dotfiles
