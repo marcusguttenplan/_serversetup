@@ -68,6 +68,7 @@ sed -e "s|local *all *postgres .*|local    all         postgres                 
 /etc/init.d/postgresql restart
 
 
+
 # *) Configure machine hostname
 # ------------------------------------------------------------------ #
 
@@ -290,22 +291,6 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
-# Allow incoming HTTP
-iptables -A INPUT -i eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
-
-# Allow outgoing HTTP
-iptables -A OUTPUT -o eth0 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i eth0 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
-
-# Allow incoming HTTPS
-iptables -A INPUT -i eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A OUTPUT -o eth0 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
-
-# Allow outgoing HTTPS
-iptables -A OUTPUT -o eth0 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i eth0 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
-
 # Ping from inside to outside
 iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type echo-reply -j ACCEPT
@@ -319,16 +304,24 @@ iptables -A INPUT -p tcp --dport 80 -m limit --limit 25/minute --limit-burst 100
 iptables -A INPUT -p tcp --dport 443 -m limit --limit 25/minute --limit-burst 100 -j ACCEPT
 
 # Make sure DNS doesn;t ever get locked out
-iptables -A INPUT -p udp --dport 53 -s 8.8.8.8 -j ACCEPT
-iptables -A INPUT -p tcp --dport 53 -s 8.8.8.8 -j ACCEPT
-iptables -A INPUT -p tcp --dport 53 -s 8.8.4.4 -j ACCEPT
-iptables -A INPUT -p udp --dport 53 -s 8.8.4.4 -j ACCEPT
+# iptables -A INPUT -p udp --dport 53 -s 8.8.8.8 -j ACCEPT
+# iptables -A INPUT -p tcp --dport 53 -s 8.8.8.8 -j ACCEPT
+# iptables -A INPUT -p tcp --dport 53 -s 8.8.4.4 -j ACCEPT
+# iptables -A INPUT -p udp --dport 53 -s 8.8.4.4 -j ACCEPT
 
 # Log dropped packets
 iptables -N LOGGING
 iptables -A INPUT -j LOGGING
 iptables -I INPUT -m limit --limit 5/min -j LOG --log-prefix "Iptables Dropped Packet: " --log-level 7
 iptables -A LOGGING -j DROP
+
+# UFW RULES
+
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow from 10.8.0.0/24 to any port 80
+ufw allow 334
+ufw enable
 
 # Create the script to load the rules
 echo "#!/bin/sh
@@ -455,18 +448,6 @@ echo "Verify and Download NodeJS"
 
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get install -y nodejs
-
-echo
-echo
-echo
-echo "Verify and Download MongoDB"
-
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-
-#update and reload
-apt-get update
-apt-get install mongodb-org
 
 
 # *) ALMOST THERE!!!!!
