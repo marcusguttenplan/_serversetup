@@ -16,12 +16,8 @@
 HOSTNAME=
 SYSTEMIP=
 DOMAIN=
-LANGUAGE=
-CHARSET=
 SSHPORT=
-IGNOREIP=
 USER=
-ADMINEMAIL=
 PUBLICKEY="ssh-rsa . . . foo@bar.com"
 
 # ================================================================== #
@@ -93,7 +89,6 @@ mv /etc/hosts /etc/hosts.bak
 
 echo "
 127.0.0.1       localhost
-$SYSTEMIP       $HOSTNAME.$DOMAIN     $HOSTNAME
 ::1     ip6-localhost ip6-loopback
 fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
@@ -120,11 +115,6 @@ apt-get install -y ntp
 echo
 echo
 echo
-echo "Setting the language and charset"
-echo "---------------------------------------------------------------"
-
-locale-gen $LANGUAGE.$CHARSET
-/usr/sbin/update-locale LANG=$LANGUAGE.$CHARSET
 
 
 # *) ADD A USER
@@ -315,30 +305,6 @@ iptables -A INPUT -j LOGGING
 iptables -I INPUT -m limit --limit 5/min -j LOG --log-prefix "Iptables Dropped Packet: " --log-level 7
 iptables -A LOGGING -j DROP
 
-# UFW RULES
-
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow from 10.8.0.0/24 to any port 80
-ufw allow 334
-ufw enable
-
-# Create the script to load the rules
-echo "#!/bin/sh
-iptables-restore < /etc/iptables.rules
-" > /etc/network/if-pre-up.d/iptablesload
-
-# Create the script to save current rules
-echo "#!/bin/sh
-iptables-save > /etc/iptables.rules
-if [ -f /etc/iptables.downrules ]; then
-   iptables-restore < /etc/iptables.downrules
-fi
-" > /etc/network/if-post-down.d/iptablessave
-
-# Ensure they are executible
-chmod +x /etc/network/if-post-down.d/iptablessave
-chmod +x /etc/network/if-pre-up.d/iptablesload
 #
 /etc/init.d/networking restart
 #
@@ -418,25 +384,6 @@ sysctl -p
 #
 echo
 echo
-echo
-echo "Installing and configuring logwatch for log monitoring"
-# https://help.ubuntu.com/community/Logwatch
-echo "--------------------------------------------------------------"
-#
-aptitude -y install logwatch
-mkdir /var/cache/logwatch
-cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf/
-#
-cp /usr/share/logwatch/default.conf/logfiles/http.conf to /etc/logwatch/conf/logfiles
-#
-echo "
-# Log files for $DOMAIN
-LogFile = /home/$USER/public_html/$DOMAIN/log/access.log
-LogFile = /home/$USER/public_html/$DOMAIN/log/error.log
-LogFile = /home/$USER/public_html/$DOMAIN/log/ssl_error.log
-LogFile = /home/$USER/public_html/$DOMAIN/log/ssl_access.log
-" >> /etc/logwatch/conf/logfiles/http.conf
-
 
 # *) Dev Tools
 # ------------------------------------------------------------------ #
